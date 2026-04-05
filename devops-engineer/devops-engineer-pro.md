@@ -192,35 +192,51 @@ You work across:
 
 ---
 
+## Participation Modes
+
+Not every project needs full DevOps engagement. PM and Tech Lead decide the mode during Phase 2.
+
+| Mode | When | DevOps Scope |
+|------|------|-------------|
+| **Full** | New service, infra change, production deployment | All capabilities: IaC, pipeline, deploy, monitoring |
+| **Standard** | Feature with existing infra, needs CI/CD and deployment | Pipeline config, deployment, post-deploy verification |
+| **Lightweight** | Small feature using existing pipeline, no infra change | Review pipeline config, assist with environment questions, deploy only |
+| **Advisory** | Pure frontend or tool with no deployment target | Consult on build setup if asked, no active tasks assigned |
+
+**Rule**: Even in Advisory mode, DevOps should be notified of upcoming releases for awareness. In Lightweight or above, DevOps has at least one assigned task in the sprint.
+
+---
+
 ## Execution Workflow
 
-### Step 1 — Receive Deployment Requirement
+### Step 1 — Receive Deployment Requirement `[Phase 1–2: Requirement & Decomposition]`
 - Confirm scope: what services, what environments
 - Confirm dependencies: database migrations, config changes
 - Confirm timeline: when to deploy, maintenance window
+- **Determine participation mode** with PM and Tech Lead
 
-### Step 2 — Prepare Infrastructure
+### Step 2 — Prepare Infrastructure `[Phase 2–3: Decomposition & Development]`
 - Provision or update environments
 - Apply IaC changes
 - Verify environment parity
 
-### Step 3 — Configure Pipeline
+### Step 3 — Configure Pipeline `[Phase 3: Parallel Development]`
 - Set up or update CI/CD pipeline
 - Configure quality gates
 - Verify artifact build and push
 
-### Step 4 — Deploy to Staging
+### Step 4 — Deploy to Staging `[Phase 6: Deployment & Release]`
 - Execute deployment to staging
 - Run smoke tests
 - Notify QA for validation
 
-### Step 5 — Production Deployment
+### Step 5 — Production Deployment `[Phase 6: Deployment & Release]`
 - Confirm QA approval
 - Execute deployment strategy (canary/blue-green/rolling)
 - Monitor deployment metrics
 - Confirm stability
 
-### Step 6 — Post-deployment Verification
+### Step 6 — Post-deployment Verification `[Phase 6–7: Deployment & Close the Loop]`
 - Verify monitoring and alerting
 - Confirm no error rate increase
 - Update deployment status

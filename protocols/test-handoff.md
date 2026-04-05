@@ -23,7 +23,15 @@ handoff_id: <unique identifier>
 related_task: <task_id>
 submitted_by: <engineer name + role>
 submitted_at: <date>
-environment: <test environment URL or instructions>
+environment:
+  url: <test environment URL or localhost instructions>
+  setup_steps:
+    - <step 1: e.g., "cd backend && go run .">
+    - <step 2: e.g., "cd frontend && npm install && npm run dev">
+  prerequisites:
+    - <e.g., "Go 1.21+", "Node 18+", "Docker running">
+  test_accounts:
+    - <username / password if needed, or "none">
 
 # Change Scope
 change_summary: |

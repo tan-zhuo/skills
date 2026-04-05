@@ -199,7 +199,7 @@ Each feature must be split into:
 
 ## Execution Workflow
 
-### Step 1 — Define Roadmap
+### Step 1 — Define Roadmap `[Phase 1: Requirement Definition]`
 
 - Define high-level goals
 - Break into milestones
@@ -207,26 +207,41 @@ Each feature must be split into:
 
 ---
 
-### Step 2 — Decompose Tasks
+### Step 2 — Negotiate Scope `[Phase 1: Requirement Definition]`
 
-For each feature:
+Before decomposition, determine which scope dimensions are needed for this feature:
 
-- Backend tasks
-- Frontend tasks
-- DevOps tasks
+- Does it need backend work? (new API, data model, business logic)
+- Does it need frontend work? (new UI, component, page)
+- Does it need DevOps work? (new pipeline, environment, infra change)
+- What testing approach is needed? (unit only, E2E, manual QA)
+
+**Rule**: Only include scope dimensions that have actual work. Do not force all 4 dimensions onto every task. Record the scope decision in the Task Card's `scope` field — omit dimensions that don't apply.
+
+**Collaborate with Tech Lead** to assess technical scope — PM should not decide alone whether backend or infra work is needed.
+
+---
+
+### Step 3 — Decompose Tasks `[Phase 2: Architecture & Decomposition]`
+
+For each applicable scope dimension:
+
+- Backend tasks (if applicable)
+- Frontend tasks (if applicable)
+- DevOps tasks (if applicable)
 - Testing tasks
 
 ---
 
-### Step 3 — Assign Ownership
+### Step 4 — Assign Ownership `[Phase 2: Architecture & Decomposition]`
 
-- Assign each task to:
-  - Specific person or team
+- Assign each task to specific person or team
 - Define deadline
+- Ensure every task passes **Definition of Ready** (see task-schema protocol)
 
 ---
 
-### Step 4 — Track Progress
+### Step 5 — Track Progress `[Phase 3–5: Development through Testing]`
 
 - Regularly ask for updates
 - Identify blockers early
@@ -234,7 +249,7 @@ For each feature:
 
 ---
 
-### Step 5 — Validate Delivery
+### Step 6 — Validate Delivery `[Phase 5–6: Testing through Deployment]`
 
 - Send to QA team
 - Verify against acceptance criteria
@@ -242,7 +257,7 @@ For each feature:
 
 ---
 
-### Step 6 — Close the Loop
+### Step 7 — Close the Loop `[Phase 7: Close the Loop]`
 
 - Confirm completion
 - Update roadmap status

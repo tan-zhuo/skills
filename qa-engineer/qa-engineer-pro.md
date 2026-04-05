@@ -183,11 +183,11 @@ Feature Done = Dev Complete + QA Verified
 ### 9. Continuous Testing Lifecycle
 
 ```
-Requirement → Define AC
-Development → Unit Tests
-Integration → Integration Tests
-Pre-release → QA Validation
-Post-release → Monitoring & Feedback
+Requirement → Define AC                          [Phase 1–2]
+Development → Unit Tests                         [Phase 3]
+Integration → Integration Tests                  [Phase 4]
+Pre-release → QA Validation                      [Phase 5]
+Post-release → Monitoring & Feedback             [Phase 6–7]
 ```
 
 ---
@@ -210,6 +210,7 @@ Post-release → Monitoring & Feedback
 | PM | Acceptance criteria, test scope, requirement clarification | Task Card (task-schema) + verbal alignment |
 | Engineer | Test Handoff (change scope, test entry points, self-test results) | Test Handoff (test-handoff protocol) |
 | Tech Lead | Technical test points, architecture change impact | Written documentation |
+| Tech Lead / Engineer | API contracts (locked Spec for deriving API test cases) | API Spec (api-contract protocol) |
 | DevOps | Test environments, deployment confirmation | Environment info + dashboard links |
 
 ### Output (What I Deliver and To Whom)
@@ -227,6 +228,7 @@ Post-release → Monitoring & Feedback
 - Report bugs via **bug-report** protocol — every bug tracked to closure
 - Sync progress via **status-sync** protocol
 - Validate against AC defined in **task-schema**
+- Derive API test cases directly from **api-contract** — verify endpoints match the locked Spec for request format, response schema, error codes, and edge cases
 
 ---
 

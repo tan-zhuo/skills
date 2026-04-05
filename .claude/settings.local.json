@@ -1,7 +1,36 @@
 {
   "permissions": {
     "allow": [
-      "Bash(grep -E \"\\\\.md$\")"
+      "Bash(grep -E \"\\\\.md$\")",
+      "Bash(go mod:*)",
+      "Read(//usr/local/go/bin/**)",
+      "Read(//snap/bin/**)",
+      "Bash(export PATH=\"$PATH:/mnt/c/Program Files/Go/bin:/mnt/c/Go/bin\")",
+      "Read(//mnt/c/Program Files/Go/bin/**)",
+      "Read(//mnt/c/Go/bin/**)",
+      "Bash(export PATH=\"$PATH:/mnt/c/Program Files/Go/bin\")",
+      "Bash(\"/mnt/c/Program Files/Go/bin/go.exe\" mod init snake-leaderboard)",
+      "Bash(/mnt/c/Program Files/Go/bin/go.exe test:*)",
+      "Bash(npm -v)",
+      "Bash(export PATH=\"$PATH:/mnt/c/Program Files/nodejs\")",
+      "Bash(\"/mnt/c/Program Files/nodejs/node.exe\" -v)",
+      "Bash(\"/mnt/c/Program Files/nodejs/npm.cmd\" -v)",
+      "Bash(/mnt/c/Program Files/nodejs/node.exe:*)",
+      "Bash(\"/mnt/c/Program Files/nodejs/npx.exe\" --version)",
+      "Read(//mnt/c/Program Files/nodejs/**)",
+      "Bash(\"/mnt/c/Program Files/nodejs/node.exe\" \"/mnt/c/Program Files/nodejs/node_modules/npm/bin/npm-cli.js\" create vite@latest . -- --template react-ts)",
+      "Bash(cmd.exe /c \"cd /d C:\\\\\\\\Users\\\\\\\\tanzh\\\\\\\\GoProject\\\\\\\\skills\\\\\\\\demo-snake-game\\\\\\\\frontend && npm create vite@latest . -- --template react-ts\")",
+      "Bash(cmd.exe /c \"cd /d C:\\\\\\\\Users\\\\\\\\tanzh\\\\\\\\GoProject\\\\\\\\skills\\\\\\\\demo-snake-game\\\\\\\\frontend && npm install && npm install -D vitest @testing-library/react @testing-library/jest-dom @testing-library/user-event jsdom\")",
+      "Bash(cmd.exe /c \"cd /d C:\\\\\\\\Users\\\\\\\\tanzh\\\\\\\\GoProject\\\\\\\\skills\\\\\\\\demo-snake-game\\\\\\\\frontend && npx vitest run --reporter=verbose 2>&1\")",
+      "Bash(cmd.exe /c \"cd /d C:\\\\\\\\Users\\\\\\\\tanzh\\\\\\\\GoProject\\\\\\\\skills\\\\\\\\demo-snake-game\\\\\\\\frontend && npx tsc -b 2>&1\")",
+      "Bash(cmd.exe /c \"cd /d C:\\\\\\\\Users\\\\\\\\tanzh\\\\\\\\GoProject\\\\\\\\skills\\\\\\\\demo-snake-game\\\\\\\\frontend && npx vite build 2>&1\")",
+      "Bash(cmd.exe /c \"cd /d C:\\\\\\\\Users\\\\\\\\tanzh\\\\\\\\GoProject\\\\\\\\skills\\\\\\\\demo-snake-game\\\\\\\\frontend && npx vitest run 2>&1\")",
+      "Bash(\"/mnt/c/Program Files/Go/bin/go.exe\" build -o snake-server.exe .)",
+      "Bash(./snake-server.exe)",
+      "Bash(curl -s http://localhost:8080/api/scores)",
+      "Bash(\"/mnt/c/Program Files/Go/bin/go.exe\" run .)",
+      "Bash(cmd.exe /c \"taskkill /F /IM snake-server.exe\")",
+      "Bash(cmd.exe:*)"
     ]
   }
 }

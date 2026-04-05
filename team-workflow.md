@@ -189,6 +189,26 @@ Record improvement items → feed into next sprint
 
 ---
 
+## Phase Skip Rules
+
+Not every project requires all 7 phases. PM and Tech Lead decide together which phases to skip based on project scope.
+
+| Phase | Can Skip When | What to Do Instead |
+|-------|--------------|-------------------|
+| Phase 2 (Architecture) | Bugfix or trivial improvement with no API or architecture change | PM decomposes tasks directly, Tech Lead reviews task cards only |
+| Phase 4 (Integration) | Pure frontend or pure backend project with no cross-boundary dependency | Move directly from Phase 3 to Phase 5 after code review passes |
+| Phase 6 (Deployment) | Local tool, script, or library with no deployment target | Close with Phase 5 QA verification, skip to Phase 7 |
+
+**Phases that must NEVER be skipped:**
+- Phase 1 (Requirement) — every task needs a clear Task Card
+- Phase 3 (Development) — code must be written and reviewed
+- Phase 5 (Test Handoff) — every deliverable must be verified by QA
+- Phase 7 (Close the Loop) — every sprint must be reviewed
+
+**Rule**: The skip decision must be recorded in the parent Task Card's `notes` field (e.g., "Phase 4 skipped — pure frontend, no integration needed").
+
+---
+
 ## Communication Matrix
 
 ```
@@ -226,6 +246,43 @@ DevOps emergency deployment (skip normal flow, but QA confirmation required)
     ↓
 Post-mortem analysis → record improvement items
 ```
+
+### Hotfix Fast Track
+
+Hotfix is a **compressed delivery cycle** for urgent production fixes. It bypasses the normal 7-phase flow.
+
+```
+Discoverer reports issue → PM creates hotfix Task Card (type: hotfix)
+    ↓
+Tech Lead identifies root cause + assigns engineer (skip Phase 2 architecture)
+    ↓
+Engineer implements fix with tests (Phase 3 — single reviewer, no queue)
+    ↓
+QA performs targeted regression only (Phase 5 — minimal scope, not full AC)
+    ↓
+DevOps deploys via fast-track (Phase 6 — direct to production after staging smoke test)
+    ↓
+PM confirms fix in production → close the loop
+```
+
+**What is simplified vs normal flow:**
+
+| Phase | Normal | Hotfix |
+|-------|--------|--------|
+| Phase 1 (Requirement) | Full Task Card with AC | Minimal Task Card — description + root cause + fix scope only |
+| Phase 2 (Architecture) | ADR + API contract + decomposition | **Skipped** — Tech Lead provides verbal guidance |
+| Phase 3 (Development) | Full TDD + Tech Lead queued review | Fix + targeted tests + **1-person fast review** (Tech Lead or senior engineer) |
+| Phase 4 (Integration) | Full contract verification | **Skipped** unless fix touches API contracts |
+| Phase 5 (Testing) | Full AC verification + regression | **Targeted regression only** — QA tests the fix + directly affected areas |
+| Phase 6 (Deployment) | Staging → canary → production | Staging smoke test → **direct production deploy** |
+| Phase 7 (Close Loop) | Sprint review | **Post-mortem required** — root cause + prevention measures |
+
+**Rules:**
+- Only PM or Tech Lead can authorize a hotfix — engineers cannot self-declare
+- Post-mortem is **mandatory** after every hotfix — document root cause and what to change to prevent recurrence
+- If the hotfix introduces new behavior (not just fixing broken behavior), it must go through the normal flow instead
+
+---
 
 ### Requirement Change
 

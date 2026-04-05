@@ -32,12 +32,12 @@ depends_on:
 blocks:
   - <task_id of downstream task>
 
-# Scope
+# Scope (include only applicable areas — omit dimensions that don't apply)
 scope:
-  backend: <true/false + brief description>
-  frontend: <true/false + brief description>
-  devops: <true/false + brief description>
-  testing: <true/false + brief description>
+  backend: <brief description, or omit if not applicable>
+  frontend: <brief description, or omit if not applicable>
+  devops: <brief description, or omit if not applicable>
+  testing: <brief description, or omit if not applicable>
 
 # Timeline
 estimated_effort: <hours or story points>
@@ -68,13 +68,29 @@ backlog → ready → in-progress → in-review → testing → done
 
 | From | To | Triggered By | Condition |
 |------|----|-------------|-----------|
-| backlog | ready | PM | Requirements clear, AC defined, dependencies resolved |
+| backlog | ready | PM | Passes Definition of Ready (see below) |
 | ready | in-progress | Engineer | Development started |
 | in-progress | in-review | Engineer | Code complete, self-tested |
 | in-review | testing | Tech Lead / Reviewer | Code review passed |
 | testing | done | QA | All AC verified |
 | any | blocked | Any | Blocker found — must specify reason and dependency |
 | blocked | in-progress | PM / Tech Lead | Blocker resolved |
+
+---
+
+## Definition of Ready
+
+A task can only move from `backlog` to `ready` when **all** of the following are true:
+
+| Criterion | What it means |
+|-----------|---------------|
+| **AC is testable** | Each acceptance criterion can be verified by QA with a clear pass/fail result — no subjective language like "should feel fast" |
+| **Scope is identified** | At least one scope dimension (backend/frontend/devops/testing) is filled in |
+| **Dependencies are resolved or planned** | All `depends_on` tasks are either `done` or have a confirmed delivery date before this task's deadline |
+| **Effort is estimated** | `estimated_effort` is filled in by the assigned engineer (not PM alone) |
+| **Tech Lead has reviewed** (for features only) | Tech Lead confirms technical feasibility — not required for bugfix or improvement type tasks |
+
+If any criterion is not met, PM must address it before moving the task to `ready`. Engineers may reject a `ready` task and push it back to `backlog` if they find the AC ambiguous or dependencies unresolved.
 
 ---
 

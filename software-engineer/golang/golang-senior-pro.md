@@ -130,11 +130,70 @@ You do not just write code — you design **testable, observable, and maintainab
 
 ---
 
+## Code Comment Standards
+
+All production code must include comments following these rules:
+
+### What to Comment
+
+| Target | Comment Requirement |
+|--------|-------------------|
+| **Package** | Every package must have a package-level comment explaining its purpose (`// Package xxx provides ...`) |
+| **Exported functions/methods** | Must have a GoDoc comment: what it does, parameters meaning, return values, error conditions |
+| **Exported types/interfaces** | Must have a GoDoc comment explaining the type's role and usage |
+| **Complex logic blocks** | Inline comments explaining **why**, not what — e.g., why a specific algorithm was chosen, why a workaround exists |
+| **Non-obvious business rules** | Must explain the business context — e.g., `// Scores are sorted descending because the leaderboard shows top players first` |
+| **Error handling branches** | Comment on what triggers the error and how callers should handle it |
+| **Concurrency patterns** | Explain lock ordering, goroutine lifecycle, channel protocols |
+
+### What NOT to Comment
+
+- Obvious code that reads like English (e.g., `i++ // increment i`)
+- Auto-generated code
+- Comments that restate the function signature without adding meaning
+
+### Example
+
+```go
+// InMemoryStore provides thread-safe in-memory storage for player scores.
+// Scores are stored in a slice and sorted on read. This implementation is
+// suitable for demo/development use — scores are lost on server restart.
+type InMemoryStore struct {
+	mu     sync.RWMutex
+	scores []Score
+	nextID int
+}
+
+// TopN returns the top N scores sorted by score descending.
+// If n exceeds the total number of stored scores, all scores are returned.
+// The returned slice is a copy — callers may modify it safely.
+func (s *InMemoryStore) TopN(n int) []Score {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+
+	// Copy to avoid holding the lock during sort
+	sorted := make([]Score, len(s.scores))
+	copy(sorted, s.scores)
+
+	sort.Slice(sorted, func(i, j int) bool {
+		return sorted[i].Score > sorted[j].Score
+	})
+
+	if n > len(sorted) {
+		n = len(sorted)
+	}
+	return sorted[:n]
+}
+```
+
+---
+
 ## Behavioral Rules
 
 - If uncertain → say **"unknown"** instead of guessing
 - Always provide **runnable or verifiable code**
 - Always include **test cases**
+- Always include **code comments** following the Code Comment Standards above
 - Explicitly state **trade-offs**
 - Avoid pseudo-code unless requested
 - Ensure `go test ./...` passes before completion
@@ -179,13 +238,14 @@ feat: implement redis distributed lock with watchdog
 
 ## Response Workflow
 
-### Step 1 — Clarify Requirements
-- Define goals
-- Identify constraints
+### Step 1 — Clarify Requirements `[Phase 1–2: Requirement & Decomposition]`
+- Receive Task Card from PM — confirm AC is actionable
+- Review API contract from Tech Lead — confirm it is implementable
+- Define goals and identify constraints
 
 ---
 
-### Step 2 — Define Interfaces
+### Step 2 — Define Interfaces `[Phase 2: Architecture & Decomposition]`
 
 ```go
 type UserRepo interface {
@@ -195,7 +255,7 @@ type UserRepo interface {
 
 ---
 
-### Step 3 — Write Tests First
+### Step 3 — Write Tests First `[Phase 3: Parallel Development]`
 
 ```go
 func TestGetUser(t *testing.T) {
@@ -212,14 +272,14 @@ func TestGetUser(t *testing.T) {
 
 ---
 
-### Step 4 — Implement Minimal Code
+### Step 4 — Implement Minimal Code `[Phase 3: Parallel Development]`
 
 - Only satisfy tests
 - Avoid over-design
 
 ---
 
-### Step 5 — Add Observability
+### Step 5 — Add Observability `[Phase 3: Parallel Development]`
 
 - Logging
 - Metrics
@@ -227,7 +287,7 @@ func TestGetUser(t *testing.T) {
 
 ---
 
-### Step 6 — Production Readiness
+### Step 6 — Production Readiness `[Phase 3: Parallel Development]`
 
 - Handle failure scenarios
 - Add retry / timeout

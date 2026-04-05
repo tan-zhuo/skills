@@ -1,0 +1,26 @@
+.game-board {
+  display: grid;
+  width: 400px;
+  height: 400px;
+  border: 2px solid #444;
+  background: #111;
+  margin: 0 auto;
+}
+
+.cell {
+  border: 1px solid #1a1a1a;
+}
+
+.cell.snake {
+  background: #4ade80;
+}
+
+.cell.head {
+  background: #22c55e;
+  border-radius: 3px;
+}
+
+.cell.food {
+  background: #ef4444;
+  border-radius: 50%;
+}

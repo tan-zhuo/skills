@@ -106,6 +106,29 @@ roadmap_adjustments:
 
 ---
 
+### 5. Lightweight Async Sync (for small teams or fast iterations)
+
+For teams of 2-3 people or during rapid iteration phases, the full Daily Standup may be replaced with **async text updates** in the team's communication channel:
+
+```
+[date] [role] status: <one-line update>
+  blocker: <none, or brief description>
+```
+
+**Example:**
+```
+[2026-04-06] Frontend: SNAKE-FE-001 in-progress, game engine tests passing, starting UI
+  blocker: none
+```
+
+**Rules for lightweight mode:**
+- PM decides when to use lightweight vs. full standup — not the team unilaterally
+- Blockers still require **immediate escalation** regardless of sync mode
+- Must switch back to full standup if any task is `blocked` or at risk of delay
+- Sprint Review (mechanism 4) is always full format, never lightweight
+
+---
+
 ## PM Active Tracking Rules
 
 PM must not passively wait for updates:

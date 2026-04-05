@@ -99,6 +99,27 @@ changelog:
 
 ---
 
+## Mock Strategy
+
+After the contract is locked (`status: agreed`), frontend and backend develop in parallel. Frontend must mock the API to avoid blocking on backend completion.
+
+### Recommended Mock Approaches (choose based on project complexity)
+
+| Approach | When to Use | Setup |
+|----------|-------------|-------|
+| **Hardcoded mock data** | Simple projects, few endpoints | Create a `mock/` folder with static JSON matching the Spec response schema |
+| **MSW (Mock Service Worker)** | Medium projects, need realistic request/response cycle | Intercept fetch calls in the browser, return Spec-compliant responses |
+| **Mock server (json-server / Prism)** | Large projects, many endpoints, team-shared mocking | Run a local mock server that validates against the OpenAPI/Spec schema |
+
+### Mock Rules
+
+1. **Mock data must strictly follow the Spec response schema** — field names, types, and structure must match exactly
+2. **Mock error cases too** — don't only mock success; mock at least one error_case from the Spec
+3. **Remove mocks before integration** — all mock code or config must be removed or disabled before Phase 4 (Integration)
+4. **Frontend Engineer decides the approach** — Tech Lead advises if asked, but the frontend owns the mock setup
+
+---
+
 ## Integration Verification Checklist
 
 - [ ] Request parameters match Spec

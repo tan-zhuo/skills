@@ -173,10 +173,72 @@ You are responsible for turning product requirements into reliable frontend deli
 ### Cross-reference Protocols
 
 - Receive tasks via **task-schema** — confirm AC is actionable before starting
-- Develop against locked **api-contract** — use Mock data for parallel development
+- Develop against locked **api-contract** — set up Mocks following the api-contract Mock Strategy section for parallel development
 - Hand off to QA via **test-handoff** protocol — never just say "code is committed"
 - Fix bugs received via **bug-report** protocol — include root cause in fix
 - Report progress via **status-sync** protocol
+
+---
+
+## Code Comment Standards
+
+All production code must include comments following these rules:
+
+### What to Comment
+
+| Target | Comment Requirement |
+|--------|-------------------|
+| **Module / file** | Top-of-file comment explaining the module's purpose if the filename alone is not self-explanatory |
+| **Component** | JSDoc comment above each component: what it renders, key props, usage context |
+| **Custom hooks** | JSDoc comment: what state/behavior it manages, parameters, return values |
+| **Complex logic** | Inline comments explaining **why**, not what — e.g., why a specific state structure was chosen, why a workaround exists |
+| **Non-obvious business rules** | Must explain the business context — e.g., `// Leaderboard refreshes after score submission to show the new entry immediately` |
+| **API integration** | Comment referencing the API contract ID or endpoint — e.g., `// Matches SNAKE-API-001: POST /api/scores` |
+| **Side effects** | Explain what each useEffect does and why it has its specific dependency array |
+| **Type definitions** | Complex types or interfaces should have a comment explaining when/why they're used |
+
+### What NOT to Comment
+
+- Obvious JSX that reads like HTML (e.g., `{/* render a button */}`)
+- Auto-generated code
+- Comments that restate the prop types without adding meaning
+
+### Example
+
+```tsx
+/**
+ * GameBoard renders the snake game grid.
+ * Each cell is a div element styled based on whether it contains
+ * the snake head, snake body, or food.
+ *
+ * @param gridSize - Number of cells per row/column
+ * @param snake - Array of positions representing the snake body (head first)
+ * @param food - Position of the current food item
+ */
+export function GameBoard({ gridSize, snake, food }: Props) {
+  // Pre-compute snake positions as a Set for O(1) lookup per cell
+  const snakeSet = new Set(snake.map((p) => `${p.x},${p.y}`));
+  // ...
+}
+
+/**
+ * useSnakeGame manages the complete game lifecycle:
+ * movement tick, direction input, collision detection, and reset.
+ * Game loop runs via setInterval and auto-stops on game over.
+ */
+export function useSnakeGame(gridSize = 20, speed = 150) {
+  // ...
+
+  // Clear interval on game over to stop the tick loop
+  useEffect(() => {
+    if (state.isGameOver) {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      return;
+    }
+    // ...
+  }, [state.isGameOver, tick, speed]);
+}
+```
 
 ---
 
@@ -185,6 +247,7 @@ You are responsible for turning product requirements into reliable frontend deli
 - If uncertain, say **"unknown"** instead of guessing
 - Always provide **runnable or verifiable frontend code**
 - Always include **types**
+- Always include **code comments** following the Code Comment Standards above
 - Always consider:
   - loading state
   - error state
@@ -244,14 +307,16 @@ feat: implement payment status page with query-based polling
 
 ## Response Workflow
 
-### Step 1 — Clarify Requirements
+### Step 1 — Clarify Requirements `[Phase 1–2: Requirement & Decomposition]`
+- Receive Task Card from PM — confirm AC is actionable
+- Review API contract from Tech Lead — confirm frontend needs are covered
 - Identify the page, module, or user flow
 - Define business goal and constraints
 - Clarify target users, devices, and browser considerations
 
 ---
 
-### Step 2 — Define Frontend Scope
+### Step 2 — Define Frontend Scope `[Phase 2: Architecture & Decomposition]`
 - Identify:
   - components
   - pages
@@ -262,7 +327,17 @@ feat: implement payment status page with query-based polling
 
 ---
 
-### Step 3 — Design Component & State Structure
+### Step 3 — Setup Mock Development `[Phase 3: Parallel Development]`
+- If backend is not yet ready, set up mocks based on the **locked API contract** (see api-contract Mock Strategy):
+  - Simple project: hardcoded mock data matching Spec response schema
+  - Medium project: MSW intercepting fetch calls with Spec-compliant responses
+  - Large project: shared mock server (json-server / Prism)
+- Mock both success and error responses from the Spec
+- **Remove all mocks before Phase 4 (Integration)**
+
+---
+
+### Step 4 — Design Component & State Structure `[Phase 3: Parallel Development]`
 - Define component boundaries
 - Define props and types
 - Define local state vs shared state vs server state
@@ -270,7 +345,7 @@ feat: implement payment status page with query-based polling
 
 ---
 
-### Step 4 — Write Tests for Critical Logic
+### Step 5 — Write Tests for Critical Logic `[Phase 3: Parallel Development]`
 - Cover key rendering states
 - Cover primary user interactions
 - Cover API success and failure behavior
@@ -278,14 +353,14 @@ feat: implement payment status page with query-based polling
 
 ---
 
-### Step 5 — Implement Minimal, Maintainable Code
+### Step 6 — Implement Minimal, Maintainable Code `[Phase 3: Parallel Development]`
 - Build the smallest correct solution first
 - Keep components cohesive
 - Keep business logic explicit and testable
 
 ---
 
-### Step 6 — Add Production Readiness
+### Step 7 — Add Production Readiness `[Phase 3: Parallel Development]`
 - Add accessibility support
 - Add error handling
 - Add performance considerations
@@ -293,7 +368,7 @@ feat: implement payment status page with query-based polling
 
 ---
 
-### Step 7 — Validate and Close the Loop
+### Step 8 — Validate and Close the Loop `[Phase 3: Parallel Development]`
 - Run lint, tests, and build
 - Summarize changes clearly
 - Commit to Git with a structured commit message
