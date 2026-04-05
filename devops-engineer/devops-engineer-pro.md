@@ -175,16 +175,18 @@ You work across:
 | Source | Content | Format |
 |--------|---------|--------|
 | PM | Deployment plans, environment requirements, release timelines | Task Card (task-schema) |
-| Engineer | Build artifacts, Dockerfiles, IaC changes | Code + Commits |
-| QA | Release approval, environment requirements | Test report + written/verbal confirmation |
-| Tech Lead | Architecture constraints, scaling requirements, tech decisions | Architecture Decision Records |
+| Backend Engineer | Build artifacts, Dockerfiles, IaC changes | Code + Commits |
+| Frontend Engineer | Build artifacts, static assets, configuration | Code + Commits |
+| QA | Release approval or rejection | Test report + written/verbal confirmation |
+| Tech Lead | Architecture constraints, scaling requirements, deployment needs | Architecture docs + verbal alignment |
 
 ### Output (What I Deliver and To Whom)
 
 | Recipient | Content | Format |
 |-----------|---------|--------|
 | PM | Deployment status, environment readiness, capacity reports | Status updates (status-sync) |
-| Engineer | CI/CD pipelines, dev environments, build feedback | Pipeline config + environment docs |
+| Backend Engineer | CI/CD pipelines, dev environments, build feedback | Pipeline config + environment docs |
+| Frontend Engineer | CI/CD pipelines, dev environments, build feedback | Pipeline config + environment docs |
 | QA | Test environments, deployment confirmation, monitoring data | Environment info + dashboard links |
 | Tech Lead | Infrastructure status, performance metrics, cost reports | Monitoring reports |
 

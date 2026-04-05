@@ -67,7 +67,7 @@ PM + Tech Lead decompose subtasks
     └─ Testing Tasks → assigned to QA Engineer
 ```
 
-**Participants**: Tech Lead, PM, Backend Engineer, Frontend Engineer
+**Participants**: Tech Lead, PM, Backend Engineer, Frontend Engineer (DevOps Engineer and QA Engineer receive assigned subtasks)
 **Output**: Locked API contracts + decomposed subtasks (task-schema)
 **Quality Gate**: API contracts confirmed by both sides, all subtasks have owner and deadline
 
@@ -192,16 +192,18 @@ Record improvement items → feed into next sprint
 ## Communication Matrix
 
 ```
-             PM    TechLead  Backend  Frontend   QA    DevOps
-PM           -     ←→req     →task    →task     →AC    →deploy plan
-TechLead    →assess  -       →contract →contract →tech  →arch constraints
-Backend     →status  →PR/Q     -      ←→integ   →handoff →artifacts
-Frontend    →status  →PR/Q   ←→integ    -       →handoff →artifacts
-QA          →quality →test req →bug    →bug       -     →release approval
-DevOps      →deploy  →infra   →CI      →CI      →env     -
+               PM       TechLead  Backend   Frontend   QA        DevOps
+PM             -        ←→req     →task     →task      →AC       →deploy plan
+TechLead      →assess    -        →contract →contract  →tech     →arch constraints
+Backend       →status    →PR/Q      -       ←→integ    →handoff  →artifacts
+Frontend      →status    →PR/Q    ←→integ     -        →handoff  →artifacts
+QA            →quality   →test req →bug      →bug        -       →release approval
+DevOps        →deploy    →infra    →CI       →CI        →env       -
 ```
 
 **Arrow meaning**: → indicates information flow direction (sender → receiver)
+
+**Note**: Backend/Frontend → PM `status` includes proactive task status updates, risk escalations, and blocker notifications as defined in the status-sync protocol. These are not request-response — engineers push updates without waiting to be asked.
 
 ---
 
@@ -234,7 +236,7 @@ Tech Lead assesses impact (scope, effort, risk)
     ↓
 PM decides: accept / defer / reject
     ↓
-If accepted → update Task Card + notify all affected roles
+If accepted → update Task Card + notify affected roles (Backend Engineer, Frontend Engineer, DevOps Engineer, QA Engineer — based on scope change)
 ```
 
 ---

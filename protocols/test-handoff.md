@@ -54,7 +54,7 @@ self_test_results:
   manual_verification: |
     <what was manually verified and results>
 
-# Known Limitations
+# Known Limitations (see Known Issues vs Bugs below)
 known_issues:
   - <any known limitation or edge case not yet handled>
 
@@ -88,3 +88,17 @@ QA may reject a Handoff when:
 - Change scope description is unclear
 - Self-test did not pass
 - Missing AC definition (return to PM for supplementation)
+
+---
+
+## Known Issues vs Bugs
+
+| Aspect | Known Issue | Bug |
+|--------|------------|-----|
+| **When identified** | Before handoff, by the engineer during development | During testing, by QA |
+| **Tracked in** | Test Handoff `known_issues` field | Bug Report (bug-report protocol) |
+| **Who decides priority** | PM decides whether to address now or defer | PM / Tech Lead confirms priority |
+| **QA action** | QA acknowledges and does NOT create a duplicate Bug Report for items already listed as known issues | QA creates Bug Report for any new defect found during testing |
+| **Closure** | PM creates a follow-up task if needed, or accepts the limitation | Must go through full bug lifecycle (Fixed → Verified → Closed) |
+
+**Rule**: Engineers must not abuse `known_issues` to hide bugs. A known issue is a **deliberate, PM-acknowledged scope limitation** — not an unfixed defect.

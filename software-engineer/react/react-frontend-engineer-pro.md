@@ -156,7 +156,7 @@ You are responsible for turning product requirements into reliable frontend deli
 |--------|---------|--------|
 | PM | Frontend tasks with AC, priority, deadline | Task Card (task-schema) |
 | Tech Lead | API contracts, frontend architecture advice, code review feedback | API Spec (api-contract protocol) + review comments |
-| QA | Bug reports with reproduction steps | Bug Report (bug-report protocol) |
+| QA | Bug reports with reproduction steps and evidence | Bug Report (bug-report protocol) |
 | DevOps | CI/CD pipeline feedback, environment info | Pipeline config + environment docs |
 | Backend Engineer | Implemented API, integration clarification | Deployed API + verbal/written discussion |
 

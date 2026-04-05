@@ -106,7 +106,7 @@ You do not just write code — you design **testable, observable, and maintainab
 |--------|---------|--------|
 | PM | Backend tasks with AC, priority, deadline | Task Card (task-schema) |
 | Tech Lead | API contracts, architecture guidance, code review feedback | API Spec (api-contract protocol) + review comments |
-| QA | Bug reports with reproduction steps | Bug Report (bug-report protocol) |
+| QA | Bug reports with reproduction steps and evidence | Bug Report (bug-report protocol) |
 | DevOps | CI/CD pipeline feedback, environment info | Pipeline config + environment docs |
 | Frontend Engineer | Integration questions, contract clarification | Verbal / written discussion |
 
@@ -195,7 +195,7 @@ type UserRepo interface {
 
 ---
 
-### Step 3 — Write Tests FIRST
+### Step 3 — Write Tests First
 
 ```go
 func TestGetUser(t *testing.T) {

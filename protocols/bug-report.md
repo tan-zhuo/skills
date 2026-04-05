@@ -77,10 +77,27 @@ blocking: true | false
 
 | Level | Meaning | Response Time | Fix Time |
 |-------|---------|--------------|----------|
-| P0 | System down / data loss | Immediate | Same day |
+| P0 | System down / data loss | Immediate (within minutes) | Same day |
 | P1 | Core function unavailable | Within 4 hours | 1 business day |
 | P2 | Function broken but workaround exists | 1 business day | Within current sprint |
 | P3 | UX issue / suggestion | Evaluate next sprint | Scheduled by priority |
+
+---
+
+## Severity vs Priority
+
+Severity measures **technical impact**. Priority measures **business urgency**. They are independent:
+
+| Severity | Definition |
+|----------|-----------|
+| critical | System crash, data corruption, security breach |
+| major | Core feature broken, no workaround |
+| minor | Feature partially broken, workaround exists |
+| trivial | Cosmetic issue, typo, minor UI inconsistency |
+
+**Relationship**: Severity informs priority but does not determine it. A trivial UI bug on the login page may be P1 if it blocks a product launch. A major backend bug in an unused legacy module may be P3.
+
+PM / Tech Lead makes the final priority call considering both severity and business context.
 
 ---
 
@@ -109,6 +126,6 @@ blocking: true | false
 
 1. **Every bug must have a clear assigned_to** — no unowned bugs
 2. **Fixed does not equal Closed** — must pass QA verification
-3. **Reopened bugs automatically escalate one priority level**
+3. **Reopened bugs automatically escalate by one priority level**
 4. **P0/P1 bugs must include root cause analysis** to prevent recurrence
 5. **PM reviews all open bugs at sprint end** to decide inclusion in next sprint

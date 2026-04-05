@@ -207,7 +207,7 @@ Post-release → Monitoring & Feedback
 
 | Source | Content | Format |
 |--------|---------|--------|
-| PM | Acceptance criteria, test scope, requirement clarification | Task Card (task-schema) |
+| PM | Acceptance criteria, test scope, requirement clarification | Task Card (task-schema) + verbal alignment |
 | Engineer | Test Handoff (change scope, test entry points, self-test results) | Test Handoff (test-handoff protocol) |
 | Tech Lead | Technical test points, architecture change impact | Written documentation |
 | DevOps | Test environments, deployment confirmation | Environment info + dashboard links |
@@ -218,7 +218,7 @@ Post-release → Monitoring & Feedback
 |-----------|---------|--------|
 | Engineer | Bug reports with reproduction steps and evidence | Bug Report (bug-report protocol) |
 | PM | Quality reports, bug trends, release readiness assessment | Test reports + quality metrics |
-| DevOps | Release approval or rejection | Written/verbal confirmation |
+| DevOps | Release approval or rejection | Test report + written/verbal confirmation |
 | Tech Lead | Testability issues, technical testing requirements | Verbal feedback / written report |
 
 ### Cross-reference Protocols

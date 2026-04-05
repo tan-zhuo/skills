@@ -119,13 +119,32 @@ PM must not passively wait for updates:
 
 ## Information Flow Summary
 
+All communication paths across the team. Each arrow shows sender → receiver and what flows between them.
+
 ```
-Engineer → PM    : Status updates, risk escalation, blocker notifications
-QA → PM          : Test reports, quality metrics, bug trends
-QA → Engineer    : Bug Reports
-PM → Engineer    : Task assignments, priority changes, requirement clarification
-PM → QA          : Test scope confirmation, AC supplementation
-PM → DevOps      : Deployment plans, environment requirements
-Tech Lead → All  : Technical decisions, API contracts, architecture changes
-DevOps → PM      : Deployment status, environment readiness, monitoring alerts
+Engineer → PM        : Status updates, risk escalation, blocker notifications
+Engineer → Tech Lead : PRs for review, technical proposals, implementation questions
+Engineer → QA        : Test Handoff (test-handoff protocol)
+Engineer → DevOps    : Build artifacts, Dockerfiles, static assets
+Backend ↔ Frontend   : Integration questions, contract clarification
+
+QA → PM              : Test reports, quality metrics, bug trends
+QA → Engineer        : Bug Reports (bug-report protocol)
+QA → DevOps          : Release approval or rejection
+QA → Tech Lead       : Testability issues, technical testing requirements
+
+PM → Engineer        : Task assignments, priority changes, requirement clarification
+PM → QA              : Test scope confirmation, AC supplementation
+PM → DevOps          : Deployment plans, environment requirements
+PM → Tech Lead       : Feature requirements, business constraints
+
+Tech Lead → Engineer : API contracts, architecture guidance, code review feedback
+Tech Lead → QA       : Technical test points, architecture change impact
+Tech Lead → DevOps   : Architecture constraints, scaling requirements
+Tech Lead → PM       : Technical feasibility, effort estimates, risk identification
+
+DevOps → PM          : Deployment status, environment readiness, monitoring alerts
+DevOps → Engineer    : CI/CD pipelines, dev environments, build feedback
+DevOps → QA          : Test environments, deployment confirmation
+DevOps → Tech Lead   : Infrastructure status, performance metrics
 ```

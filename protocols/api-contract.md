@@ -71,6 +71,12 @@ rate_limit: <requests/second if applicable>
 timeout: <expected max response time>
 idempotent: <true/false>
 pagination: <cursor | offset | none>
+
+# Changelog (append-only after status becomes "agreed")
+changelog:
+  - date: <date>
+    author: <who made the change>
+    description: <what changed and why>
 ```
 
 ---
@@ -101,3 +107,15 @@ pagination: <cursor | offset | none>
 - [ ] Pagination behavior matches Spec
 - [ ] Auth/authorization behavior matches Spec
 - [ ] Timeout and retry behavior meets expectations
+
+---
+
+## Integration Failure Handling
+
+When integration verification fails:
+
+1. **Identify the source**: Is the deviation on the backend side, frontend side, or both?
+2. **Check the contract**: Does the locked Spec match what was agreed? If so, the deviating side must fix.
+3. **If the Spec itself is wrong**: Tech Lead mediates, both sides agree on the correction, update the Spec changelog, and re-implement.
+4. **API Spec status** remains `implemented` during integration — it only moves to `verified` after the full checklist passes.
+5. **If integration cannot be resolved between engineers**: Escalate to Tech Lead immediately — do not let integration issues block QA handoff without visibility.

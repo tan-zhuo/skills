@@ -84,3 +84,17 @@ backlog → ready → in-progress → in-review → testing → done
 2. **When Engineer receives a task**: Must confirm AC is clear and actionable — return to PM for clarification if not
 3. **When transitioning tasks**: Status changes must be performed by the designated trigger role — no skipping states
 4. **When splitting subtasks**: Must link parent_task, and subtask scope must not exceed parent scope
+
+---
+
+## Bug-related Status Transitions
+
+When QA discovers a bug during the `testing` phase:
+
+| Scenario | Task Status Action |
+|----------|--------------------|
+| Minor bug (P2/P3) | Task stays in `testing`, bug tracked separately via bug-report protocol |
+| Major bug (P1) | Task reverts to `in-progress`, engineer prioritizes fix, re-enters `in-review` → `testing` after fix |
+| Critical bug (P0) | Task reverts to `in-progress`, PM immediately coordinates resources, follows emergency handling flow in team-workflow |
+
+**Rule**: A task cannot move to `done` while any P0 or P1 bug linked to it remains open.

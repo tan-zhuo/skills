@@ -163,7 +163,7 @@ Each feature must be split into:
 | Stakeholders / Business | Business goals, feature requests, user feedback | Verbal / written requirements |
 | Tech Lead | Technical feasibility assessment, effort estimates, risk identification | Written assessment / meeting |
 | QA | Quality reports, bug trends, release readiness | Test reports + quality metrics |
-| DevOps | Deployment status, environment readiness, capacity reports | Status updates |
+| DevOps | Deployment status, environment readiness, capacity reports | Status updates (status-sync protocol) |
 | Engineers | Progress updates, blocker notifications, risk escalations | Status Sync (status-sync protocol) |
 
 ### Output (What I Deliver and To Whom)
@@ -174,7 +174,7 @@ Each feature must be split into:
 | Backend Engineer | Backend tasks with AC, priority, deadline | Task Card (task-schema) |
 | Frontend Engineer | Frontend tasks with AC, priority, deadline | Task Card (task-schema) |
 | DevOps Engineer | Deployment plans, environment requirements, release timelines | Task Card (task-schema) |
-| QA Engineer | Test scope, acceptance criteria, requirement clarification | Task Card AC + verbal alignment |
+| QA Engineer | Test scope, acceptance criteria, requirement clarification | Task Card (task-schema) + verbal alignment |
 
 ### Cross-reference Protocols
 
