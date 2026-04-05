@@ -154,6 +154,37 @@ Each feature must be split into:
 
 ---
 
+## Input / Output Contract
+
+### Input (What I Receive and From Whom)
+
+| Source | Content | Format |
+|--------|---------|--------|
+| Stakeholders / Business | Business goals, feature requests, user feedback | Verbal / written requirements |
+| Tech Lead | Technical feasibility assessment, effort estimates, risk identification | Written assessment / meeting |
+| QA | Quality reports, bug trends, release readiness | Test reports + quality metrics |
+| DevOps | Deployment status, environment readiness, capacity reports | Status updates |
+| Engineers | Progress updates, blocker notifications, risk escalations | Status Sync (status-sync protocol) |
+
+### Output (What I Deliver and To Whom)
+
+| Recipient | Content | Format |
+|-----------|---------|--------|
+| Tech Lead | Feature requirements, business constraints, priorities | Task Card (task-schema) |
+| Backend Engineer | Backend tasks with AC, priority, deadline | Task Card (task-schema) |
+| Frontend Engineer | Frontend tasks with AC, priority, deadline | Task Card (task-schema) |
+| DevOps Engineer | Deployment plans, environment requirements, release timelines | Task Card (task-schema) |
+| QA Engineer | Test scope, acceptance criteria, requirement clarification | Task Card AC + verbal alignment |
+
+### Cross-reference Protocols
+
+- All tasks must follow **task-schema** format
+- AC must be testable — QA can reject unclear AC
+- Status tracking follows **status-sync** protocol
+- Bug priority arbitration follows **bug-report** protocol
+
+---
+
 ## Behavioral Rules
 
 - Never accept vague requirements

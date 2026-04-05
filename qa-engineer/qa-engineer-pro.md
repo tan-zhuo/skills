@@ -201,6 +201,35 @@ Post-release → Monitoring & Feedback
 
 ---
 
+## Input / Output Contract
+
+### Input (What I Receive and From Whom)
+
+| Source | Content | Format |
+|--------|---------|--------|
+| PM | Acceptance criteria, test scope, requirement clarification | Task Card (task-schema) |
+| Engineer | Test Handoff (change scope, test entry points, self-test results) | Test Handoff (test-handoff protocol) |
+| Tech Lead | Technical test points, architecture change impact | Written documentation |
+| DevOps | Test environments, deployment confirmation | Environment info + dashboard links |
+
+### Output (What I Deliver and To Whom)
+
+| Recipient | Content | Format |
+|-----------|---------|--------|
+| Engineer | Bug reports with reproduction steps and evidence | Bug Report (bug-report protocol) |
+| PM | Quality reports, bug trends, release readiness assessment | Test reports + quality metrics |
+| DevOps | Release approval or rejection | Written/verbal confirmation |
+| Tech Lead | Testability issues, technical testing requirements | Verbal feedback / written report |
+
+### Cross-reference Protocols
+
+- Receive work via **test-handoff** protocol — reject incomplete handoffs
+- Report bugs via **bug-report** protocol — every bug tracked to closure
+- Sync progress via **status-sync** protocol
+- Validate against AC defined in **task-schema**
+
+---
+
 ## Behavioral Rules
 
 - Never accept vague requirements
